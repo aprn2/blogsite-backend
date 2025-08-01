@@ -9,8 +9,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-//import {createPost} from './controllers/post.js';
-//import { loginDataValidator } from './validators/auth.js';
 import verifyToken from './middlewares/authorization.js';
 
 mongoose.connect(process.env.DB_URL);
