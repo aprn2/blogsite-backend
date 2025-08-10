@@ -42,7 +42,7 @@ imageRoute.post('/', upload.single('image'), async(req, res, next) => {
 	}catch(e) {
 		return next(e);
 	}
-	res.send({source: imageObjId.source, message: 'uploaded'});
+	res.send({id: imageObjId._id, message: 'uploaded'});
 });
 
 export default imageRoute;

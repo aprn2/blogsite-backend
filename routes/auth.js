@@ -5,10 +5,10 @@ const authRoute = express.Router();
 
 authRoute.post('/login', async(req, res, next) => {
 	const user = await authenticate(req.body)
-	const refreshToken =  await getRefreshToken(user);
+	const refreshToken =  await getRefreshToken({id: user.id, userName: user.userName});
 	const accessToken =  await getAccessToken(refreshToken);
 	res.cookie('refreshToken', refreshToken, {httpOnly: true});
-	res.json({token: accessToken});
+	res.json({accessToken: accessToken});
 });
 
 authRoute.delete('logout', async(req, res, next) => {

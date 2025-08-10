@@ -1,23 +1,24 @@
- mport mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const SectionSchema = new mongoose.Schema({
 	subTitle: {
 		type: String,
 		required: true
 	},
-	images: [{
-		image: {
-			type: mongoose.Schema.ObjectId,
-			ref: 'Image',
-			required: true
-		},
-		description: String,
-	}],
-	paragraphs: {
-		type: [String],
-		required: true,
-		validate: v => Array.isArray(v) && v.length > 0
-	}
+	contents: [{
+		type: mongoose.Schema.Types.Mixed,
+		validate: {
+			validator: v => {
+				return (
+                    v && (
+                        (v.type === 'text' && typeof v.content === 'string' && v.content.length > 5)
+                        || (v.type === 'image' && typeof v.content === 'string')
+                    )
+                )
+			},
+			message: 'Content must be String or image' // paragraph or image
+		}
+	}]
 }, {_id: false});
 
 const PostSchema = new mongoose.Schema({
@@ -35,7 +36,7 @@ const PostSchema = new mongoose.Schema({
 		required: true
 	},
 
-	author: [{
+	authorId: [{
 		type: mongoose.Schema.ObjectId,
 		ref: 'user',
 		required: true
@@ -56,13 +57,14 @@ const PostSchema = new mongoose.Schema({
 		default: 0
 	},
 	coverImage: {
-		type: String,
+		type: mongoose.Types.ObjectId,
+		ref: 'Image',
 		required: true
 	},
 	body: {
 		type: [SectionSchema],
 		required: true,
-		validaton: v => Array.isArray(v) && v.length > 0
+		validation: v => Array.isArray(v) && v.length > 0
 	}
 }, {timestamps: true, strict: 'throw'});
 

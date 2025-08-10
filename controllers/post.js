@@ -15,13 +15,12 @@ async function getPostById(postId) {
 	return post;
 }
 
-async function createPost(post, {authorUserName}) {
+async function createPost(post, {authorId}) {
 	const {value: validatedPostData, error: validationError} = createPostDataValidator.validate(post);
 	if(validationError) {
 		throw new BadInputDataError('invalid post data' + validationError.message);
 	}
-	const loggedUser = await User.findOne({userName: authorUserName});
-	validatedPostData.author = loggedUser._id;
+	validatedPostData.authorId = authorId;
 	validatedPostData.body.map((section) => {
 		if(! section.images) {
 			return;

@@ -13,10 +13,6 @@ const createPostDataValidator = Joi.object({
 		.min(3)
 		.max(300)
 		.required(),
-	author: Joi.string()
-		.min(5)
-		.max(20)
-		.required(),
 	tags: Joi.array()
 		.items(Joi.string())
 		.min(1)
@@ -28,14 +24,23 @@ const createPostDataValidator = Joi.object({
 			subTitle: Joi.string()
 				.max(50)
 				.required(),
-			images: Joi.array()
-				.items(Joi.string())
-				.min(0).required(), // array of images or empty array
-			paragraphs: Joi.array()
-				.items(Joi.string() .min(3))
-				.min(1)
-				.required() // array of paragraphs atleast one paragraph
-
+		contents: Joi.array()
+			.items(
+				Joi.object({
+					type: Joi.string().valid('text', 'image'),
+					url: Joi.string().when('type', {
+						is: 'image',
+						then: Joi.required(),
+						otherwise: Joi.forbidden()
+					}),
+					content: Joi.string().when('type', {
+						is: 'text',
+						then: Joi.required(),
+						otherwise: Joi.forbidden()
+					})
+				})
+			)
+		.min(1).required(), // array of images or text array, atleast one element is needed
 	})).min(1).required() // atleast one section
 
 }).required();

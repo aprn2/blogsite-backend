@@ -14,7 +14,7 @@ async function getAccessToken(refreshToken) {
 		if(err) {
 			throw new UnauthorizedAccessError('refresh token tampered' + err.message);
 		};
-		accessToken = jwt.sign({username: user.userName}, process.env.JWT_SECRET, {expiresIn: '10min'});
+		accessToken = jwt.sign({username: user.userName}, process.env.JWT_SECRET, {expiresIn: '100min'});
 	});
 	const foundToken = await RefreshToken.findOne({refreshToken: refreshToken});
 	if(! foundToken) {
@@ -28,7 +28,7 @@ async function authenticate(credential) {
 		throw new BadInputDataError('credential invalid' + validationError.message);
 	}
 	const passHash = createHash('sha256').update(validatedData.password).digest('hex');
-	let user = await User.findOne({userName: validatedData.userName, passHash: passHash});
+	let user = await User.findOne({userName: validatedData.userName, passHash: passHash}, '-passHash');
 	if(! user) {
 		throw new UnauthorizedAccessError('username and password mismatch');
 	}

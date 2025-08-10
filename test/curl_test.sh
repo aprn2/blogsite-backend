@@ -2,7 +2,7 @@ HOST='localhost'
 PORT=3000
 SILENT=
 SHOW_HEADER=-i
-TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyMDIiLCJpYXQiOjE3NTE4MTk1MTUsImV4cCI6MTc1MTgyMDExNX0._tGmkwSFeq7z9oIuiEVwMT34O2MvmDNoTQj4mjiZqjE'
+TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VyMDMiLCJpYXQiOjE3NTQyMzM5NDQsImV4cCI6MTc1NDIzOTk0NH0.nvGAExZd6u6yUWwEUhe71XgQP9aa7oehXiJdwTMQptY'
 
 createUser() {
 	curl $SHOW_HEADER $SILENT -H 'Content-Type: application/json' -X POST \
@@ -19,7 +19,7 @@ createUser() {
 getUser() {
 	curl $SHOW_HEADER $SILENT \
 		--oauth2-bearer "$TOKEN" \
-		http://${HOST}:${PORT}/user/fucker001
+		http://${HOST}:${PORT}/user/testUser03
 }
 
 createImage() {
@@ -32,13 +32,14 @@ createImage() {
 getImage() {
 	curl $SHOW_HEADER $SILENT \
 		--oauth2-bearer "$TOKEN" \
-		http://${HOST}:${PORT}/image/7df714b24e53a8c948daf9254eb5496c
+		http://${HOST}:${PORT}/image/1754233984497-80a6c8c8.png \
+		-o received
 }
 login() {
 	curl $SHOW_HEADER $SILENT -H 'Content-Type: application/json' -X POST \
 		http://${HOST}:${PORT}/auth/login \
 		-d '{
-			"userName": "testUser02",
+			"userName": "testUser03",
 			"password": "sexHaver001$",
 			"remember": "true"
 		}'
@@ -46,7 +47,7 @@ login() {
 
 
 #createUser
-getUser
+#getUser
 #createImage
 #getImage
-#login
+login
