@@ -26,11 +26,6 @@ const PostSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	id: {
-		type: String,
-		require: true
-	},
-
 	description: {
 		type: String,
 		required: true
