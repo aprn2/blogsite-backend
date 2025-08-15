@@ -9,8 +9,8 @@ createUser() {
 	curl $SHOW_HEADER $SILENT -H "$ORIGIN" -H 'Content-Type: application/json' -X POST \
 		http://${HOST}:${PORT}/user \
 		-d '{
-			"name": "testUser001",
-			"userName": "testUser001",
+			"name": "testUser005",
+			"userName": "testUser005",
 			"password": "Hello1!.",
 			"dob": "2000-02-12T04:35:10.227Z",
 			"email": "hello@hello.com",
@@ -40,15 +40,15 @@ login() {
 	curl $SHOW_HEADER $SILENT -H "$ORIGIN" -H 'Content-Type: application/json' -X POST \
 		http://${HOST}:${PORT}/auth/login \
 		-d '{
-			"userName": "testUser001",
+			"userName": "testUser003",
 			"password": "Hello1!.",
 			"remember": "true"
 		}'
 }
 
 
-createUser
-#getUser
+#createUser
+getUser
 #createImage
 #getImage
 #login
