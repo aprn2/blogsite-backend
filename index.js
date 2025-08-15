@@ -8,7 +8,6 @@ import authRoute from './routes/auth.js';
 import postRoute from './routes/post.js';
 import dotenv from 'dotenv';
 
-
 dotenv.config();
 
 import verifyToken from './middlewares/authorization.js';

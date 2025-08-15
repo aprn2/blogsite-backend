@@ -21,12 +21,6 @@ const userSchema = new mongoose.Schema({
 	dob: {
 		type: Date,
 		required: true,
-		validate: (dob) => {
-			const minDate = new Date('1920-01-01');
-			const today = new Date();
-
-			return dob >= minDate && dob <= today;
-		}
 	},
 	address: {
 		type: String,

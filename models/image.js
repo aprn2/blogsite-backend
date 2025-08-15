@@ -5,6 +5,10 @@ const imageSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+    removed: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const Image = mongoose.model('Image', imageSchema);
