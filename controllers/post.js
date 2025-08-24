@@ -15,22 +15,12 @@ async function getPostById(postId) {
 	return post;
 }
 
-async function createPost(post, {authorId}) {
+async function createPost(post, authorId) {
 	const {value: validatedPostData, error: validationError} = createPostDataValidator.validate(post);
 	if(validationError) {
 		throw new BadInputDataError('invalid post data' + validationError.message);
 	}
 	validatedPostData.authorId = authorId;
-	validatedPostData.body.map((section) => {
-		if(! section.images) {
-			return;
-		}
-		section.images.map((image,index) => {
-			//image.url = loggedUser._id; //juts ignore it we are gonna store this image and take and url. this ll be implementd.
-			section.images[index].image = loggedUser._id;
-			delete section.images[index].payload;
-		});
-	});
 	return await Post.create(validatedPostData);
 }
 

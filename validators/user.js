@@ -29,7 +29,11 @@ const createUserValidator = Joi.object({
     }),
 
     password: passwordComplexity({min: 8, max: 128, lowerCase: 1, upperCase: 1, symbol: 1})
-    .error(new Error('password should atleast contain 8 char with 1 lowercase, 1 uppencase and 1 special char')),
+    .required()
+    .messages({
+        'joiPasswordComplexity': 'password should atleast contain 8 char with 1 lowercase, 1 uppencase and 1 special char',
+        'any.required': 'password is required'
+    }),
 
     email: Joi.string()
     .email()

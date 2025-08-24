@@ -7,20 +7,20 @@ userRoute.get('/:userName', async(req, res, next) => {
 	let user;
 	try{
 		user = await getUserByUserName(req.params.userName);
+        return res.json(user);
 	}catch(e) {
 		return next(e);
 	}
-	res.json(user);
 });
 
 userRoute.post('/', async(req, res, next) => {
 	let result;
 	try{
 		result = await createUser(req.body);
+        return res.json(result);
 	}catch(e) {
 		return next(e);
 	}
-	res.json({message: 'user created'});
 });
 
 export default userRoute;

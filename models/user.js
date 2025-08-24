@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
 	},
 	address: {
 		type: String,
+	},
+	admin: {
+		type: Boolean,
+        default: false
 	}
 }, {timestamps: true, strict: 'throw'});
 

@@ -9,11 +9,11 @@ const PostSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	authorId: [{
+	authorId: {
 		type: mongoose.Schema.ObjectId,
 		ref: 'user',
 		required: true
-	}],
+	},
 	tags: {
 		type: [String],
 		required: true,
@@ -34,7 +34,7 @@ const PostSchema = new mongoose.Schema({
 		ref: 'Image',
 		required: true
 	},
-	content: {
+	body: {
 		type: String,
 		required: true,
 	}

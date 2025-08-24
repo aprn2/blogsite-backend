@@ -48,7 +48,7 @@ login() {
 
 
 #createUser
-getUser
+#getUser
 #createImage
 #getImage
-#login
+login

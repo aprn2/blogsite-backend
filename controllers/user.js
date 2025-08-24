@@ -6,7 +6,7 @@ import { NotFoundError, BadInputDataError } from '../utils/customErrors.js';
 async function createUser(data) {
 	const {value: validatedUserDate, error: validationError} = createUserValidator.validate(data)
 	if(validationError) {
-		throw new BadInputDataError('invalid data'+ validationError.message);
+		throw new BadInputDataError(validationError.message);
 	}
 
 	const passHash = createHash('sha256').update(validatedUserDate.password).digest('hex');
@@ -20,7 +20,7 @@ async function getUserByUserName(userName) {
 
 	const {value: validatedUserName, error: validationError} = getUserValidator.validate(userName)
 	if(validationError) {
-		throw new BadInputDataError('userName is invalid', validationError.message);
+		throw new BadInputDataError(validationError.message);
 	}
 
 	const user = await User.findOne({userName: validatedUserName}).select('-passHash');
