@@ -12,10 +12,7 @@ async function checkToken(req, res, next) {
 		req.tokenPayload = payload;
 		return next();
 	}catch(e) {
-		let refreshToken = req.cookies.refreshToken;
-		// maybe dont reject and regenerate the accesstoken, sent to user, then contimue with refreshToken 
-		res.body.accessToken = await getAccessToken(refreshToken); // obviously this function verifies the refreshtoken and ensures its in the cache or db then only creates accesstoken
-		return next();
+        throw new UnauthorizedAccessError('token invalid');
 	}
 };
 

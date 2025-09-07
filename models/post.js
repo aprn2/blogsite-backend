@@ -9,22 +9,12 @@ const PostSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	authorId: {
-		type: mongoose.Schema.ObjectId,
-		ref: 'user',
-		required: true
-	},
 	tags: {
 		type: [String],
 		required: true,
 		default: []
 	},
 	likeCounts: {
-		type: Number,
-		required: true,
-		default: 0
-	},
-	conmmentCounts: {
 		type: Number,
 		required: true,
 		default: 0

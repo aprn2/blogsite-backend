@@ -10,11 +10,11 @@ dotenv.config();
 
 async function getAccessToken(refreshToken) {
 	let accessToken;
-	jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, user) => {
+	jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, payload) => {
 		if(err) {
 			throw new UnauthorizedAccessError('refresh token tampered' + err.message);
 		};
-		accessToken = jwt.sign({username: user.userName}, process.env.JWT_SECRET, {expiresIn: '100min'});
+		accessToken = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '100min'});
 	});
 	const foundToken = await RefreshToken.findOne({refreshToken: refreshToken});
 	if(! foundToken) {

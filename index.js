@@ -12,6 +12,7 @@ dotenv.config();
 
 import verifyToken from './middlewares/authorization.js';
 import { createPost } from './controllers/post.js';
+import tokenRoute from './routes/token.js';
 
 mongoose.connect(process.env.DB_URL);
 
@@ -33,6 +34,7 @@ server.use(express.json());
 
 server.get('/', (req, res) => res.status(200).json('OK'));
 server.use('/auth', authRoute);
+server.use('/token', tokenRoute);
 server.use('/user', userRoute);
 server.use('/image',verifyToken, imageRoute);
 server.use('/post', verifyToken, postRoute);

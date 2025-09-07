@@ -15,12 +15,19 @@ async function getPostById(postId) {
 	return post;
 }
 
-async function createPost(post, authorId) {
+async function getPostSearch(keyword) {
+	let posts = await Post.find({title: {fieldName: {$regex: keyword, $options: 'i'}}});
+	if(posts) {
+		throw new NotFoundError('post Not found');
+	}
+	return posts;
+}
+
+async function createPost(post) {
 	const {value: validatedPostData, error: validationError} = createPostDataValidator.validate(post);
 	if(validationError) {
 		throw new BadInputDataError('invalid post data' + validationError.message);
 	}
-	validatedPostData.authorId = authorId;
 	return await Post.create(validatedPostData);
 }
 
@@ -28,4 +35,4 @@ async function deletePostById(postId) {
 	await Post.deleteOne({_id: postId});
 }
 
-export {createPost, getPostById};
+export {createPost, getPostById, getPostSearch};

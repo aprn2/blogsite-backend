@@ -17,11 +17,18 @@ createUser() {
 			"address": "hello street, bye, bye bye good"
 		}'
 }
+
 getUser() {
 	curl $SHOW_HEADER $SILENT -H "$ORIGIN" \
 		--oauth2-bearer "$TOKEN" \
 		http://${HOST}:${PORT}/user/testUser001
 }
+
+getAccessToken() {
+	curl $SHOW_HEADER $SILENT -H "$ORIGIN" \
+		http://${HOST}:${PORT}/token
+}
+
 
 createImage() {
 	curl $SILENT $SHOW_HEADER  -H "$ORIGIN" \
@@ -51,4 +58,5 @@ login() {
 #getUser
 #createImage
 #getImage
-login
+#login
+getAccessToken
