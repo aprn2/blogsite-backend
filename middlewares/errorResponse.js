@@ -20,6 +20,9 @@ function handleError(e, res) {
 	if(e.name === 'UnauthorizedAccessError') {
 		return res.status(401).json({message: e.message});
 	}
+	if(e.name === 'PermissionError') {
+		return res.status(401).json({message: e.message});
+	}
 	return res.status(500).json({message: 'internal server error'});
 }
 

@@ -61,4 +61,15 @@ const createPostDataValidator = Joi.object({
     'any.required': 'post should not be empty'
 });
 
-export {createPostDataValidator, postIdValidator};
+const updatePostBodyValidator = Joi.object({
+    body: Joi.string()
+    .min(3)
+    .required()
+    .messages({
+        'string.base': 'body image must be a string',
+        'string.min': 'body should be atleast 3 characters',
+        'any.required': 'body should not be empty'
+    })
+}).required();
+
+export {createPostDataValidator, postIdValidator, updatePostBodyValidator};

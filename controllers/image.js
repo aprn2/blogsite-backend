@@ -7,7 +7,7 @@ async function getImageBySource(source) {
 	if(validationError) {
 		throw new BadInputDataError('invalid source'+validationError.message);
 	}
-	const image = await Image.findOne({source: validatedSource});
+	const image = await Image.findOne({_id: validatedSource});
 	if(! image) {
 		throw new NotFoundError('image not found');
 	}

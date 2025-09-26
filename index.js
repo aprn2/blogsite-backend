@@ -11,8 +11,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import verifyToken from './middlewares/authorization.js';
-import { createPost } from './controllers/post.js';
 import tokenRoute from './routes/token.js';
+import cookieParser from 'cookie-parser';
+import likeRouter from './routes/like.js';
 
 mongoose.connect(process.env.DB_URL);
 
@@ -23,32 +24,23 @@ const corsOpt = {
         if(origin === 'http://localhost:5173') {
             return cb(null, true);
         }
-        throw new Error('cors erro');
+        throw new Error('cors error');
     },
     credentials: true
 }; 
 server.use(cors(corsOpt));
-
-
 server.use(express.json());
 
-server.get('/', (req, res) => res.status(200).json('OK'));
-server.use('/auth', authRoute);
-server.use('/token', tokenRoute);
+server.get('/', (_req, res) => res.status(200).json('OK'));
+server.use('/auth', cookieParser(), authRoute);
+server.use('/token', cookieParser(), tokenRoute);
 server.use('/user', userRoute);
 server.use('/image',verifyToken, imageRoute);
 server.use('/post', verifyToken, postRoute);
-server.use((req, res) => res.status(404).json({message: ':('}));
+server.use('/like', verifyToken, likeRouter);
+server.use((_req, res) => res.status(404).json({message: ':('}));
 
 // general error handler middleware
 server.use((err, req, res, next) => handleError(err, res));
 
 server.listen(3000);
-
-createPost({
-    title: 'kdjf',
-    description: 'kdjfkj',
-    tags: ['kj'],
-    coverImage: '688f7c801c89d677835e00e0',
-    body: 'jkj'
-}, '68a4fcf815c80b6474116e76');

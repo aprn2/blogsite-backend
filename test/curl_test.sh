@@ -56,7 +56,7 @@ login() {
 
 #createUser
 #getUser
-#createImage
+createImage
 #getImage
 #login
-getAccessToken
+#getAccessToken

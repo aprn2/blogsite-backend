@@ -32,4 +32,11 @@ class UnauthorizedAccessError extends Error {
 	}
 }
 
-export {BadInputDataError, DBConnectionError, NotFoundError, InternalServerError, UnauthorizedAccessError};
+class PermissionError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'PermissionError'
+	}
+}
+
+export {BadInputDataError, DBConnectionError, NotFoundError, InternalServerError, UnauthorizedAccessError, PermissionError};

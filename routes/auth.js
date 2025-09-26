@@ -5,14 +5,19 @@ const authRoute = express.Router();
 
 authRoute.post('/login', async(req, res, next) => {
 	const user = await authenticate(req.body)
-	const refreshToken =  await getRefreshToken({id: user.id, userName: user.userName, admin: user.admin});
+	const refreshToken =  await getRefreshToken({cxt :{id: user.id, userName: user.userName, isAdmin: user.admin}});
 	const accessToken =  await getAccessToken(refreshToken);
-	res.cookie('refreshToken', refreshToken, {httpOnly: true});
+	res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+    });
 	res.json({id: user.id, userName: user.userName, admin: user.admin, accessToken: accessToken});
 });
 
-authRoute.delete('logout', async(req, res, next) => {
-	await invalidateRefreshToken(req.cookies.refreshToken);
+authRoute.delete('/logout', async(req, res, next) => {
+    console.log('hit')
+	await invalidateRefreshToken(req.cookies['refreshToken']);
 	res.json({message: 'logged out successfully'});
 });
 

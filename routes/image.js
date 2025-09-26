@@ -25,8 +25,8 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 
-imageRoute.get('/:source', async(req, res, next) => {
-	let imageSource = await getImageBySource(req.params.source);
+imageRoute.get('/:id', async(req, res, next) => {
+	let imageSource = await getImageBySource(req.params.id);
 	let imagePath = path.join(process.cwd(), '/images', imageSource.source);
 	await fs.access(imagePath);
 	res.sendFile(imagePath);
@@ -42,7 +42,7 @@ imageRoute.post('/', upload.single('image'), async(req, res, next) => {
 	}catch(e) {
 		return next(e);
 	}
-	res.send({id: imageObjId._id, message: 'uploaded'});
+	res.json({id: imageObjId._id, message: 'uploaded'});
 });
 
 export default imageRoute;

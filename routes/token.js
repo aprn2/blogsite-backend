@@ -5,13 +5,13 @@ import { UnauthorizedAccessError } from '../utils/customErrors.js';
 const tokenRoute = express.Router();
 
 tokenRoute.get('/', async(req, res, next) => {
-    if(! req?.cookies?.refreshToken) {
-        throw new UnauthorizedAccessError('no token provided');
+    if(! req.cookies['refreshToken']) {
+        throw new UnauthorizedAccessError('no cookie provided');
     }
 
     const refreshToken = req.cookies['refreshToken'];
     const newAccessToken = await getAccessToken(refreshToken);
-    req.send(newAccessToken);
+    return res.send({accessToken: newAccessToken});
 });
 
 export default tokenRoute;
