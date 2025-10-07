@@ -1,7 +1,6 @@
 import Post from "../models/post.js";
-import User from "../models/user.js";
 import {postIdValidator, createPostDataValidator, updatePostBodyValidator} from '../validators/post.js';
-import {BadInputDataError, InternalServerError, NotFoundError} from '../utils/customErrors.js';
+import {BadInputDataError, NotFoundError} from '../utils/customErrors.js';
 
 async function getPostById(postId) {
 	const {value: validatedPostId, error: validationError} = postIdValidator.validate(postId);
@@ -44,7 +43,7 @@ async function editPost(id, postBody) {
 	if(validationError) {
 		throw new BadInputDataError('invalid post body' + validationError.message);
 	}
-	return await Post.findOneAndUpdate({_id: id}, {$set: {body: validatedPostBody}}, {runValidators: true, new: true});
+	return await Post.findOneAndUpdate({_id: id}, {$set: {body: validatedPostBody.body}}, {runValidators: true, new: true});
 }
 
 async function deletePostById(postId) {

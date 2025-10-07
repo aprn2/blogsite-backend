@@ -1,17 +1,14 @@
-import mongoose from "mongoose"
 import { Like } from "../models/like.js"
+import Post from "../models/post.js";
 
 export async function createLike(userId, postId) {
-    await Like.create({postRef: postId, userRef: userId})
+    await Like.create({postRef: postId, userRef: userId});
+    await Post.findByIdAndUpdate(postId, {$inc: { likeCounts: 1}}, {new: true});
 }
 
 export async function removeLike(userId, postId) {
-    const session = mongoose.startSession();
-    try{
-        await Like.deleteMany({postRef: postId, userRef: userId})
-    }catch{
-    }finally{
-    }
+    await Like.deleteMany({postRef: postId, userRef: userId})
+    await Post.findByIdAndUpdate(postId, {$inc: { likeCounts: -1}}, {new: true});
 }
 
 export async function isLiked(userId, postId) {
@@ -23,9 +20,8 @@ export async function isLiked(userId, postId) {
 }
 
 export async function getLiked(userId) {
-    const like = await Like.find({userRef: userId})
-    if(! like) {
-        return false;
-    }
-    return true;
+    const likes = await Like.find({userRef: userId})
+    const likedPostIds = likes.map(l => l.postRef);
+    const likedPosts = await Post.find({ _id: { $in: likedPostIds } });
+    return likedPosts;
 }

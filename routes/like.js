@@ -27,7 +27,7 @@ likeRouter.delete('/', async(req, res) => {
 
     await removeLike(userId, postId);
 
-    res.json({message: 'liked removed'});
+    return res.json({message: 'liked removed'});
     
 });
 

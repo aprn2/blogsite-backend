@@ -12,7 +12,7 @@ authRoute.post('/login', async(req, res, next) => {
         secure: true,
         sameSite: 'none'
     });
-	res.json({id: user.id, userName: user.userName, admin: user.admin, accessToken: accessToken});
+	res.json({id: user.id, userName: user.userName, admin: user.admin, accessToken: accessToken, dob: user.dob, email: user.email});
 });
 
 authRoute.delete('/logout', async(req, res, next) => {
