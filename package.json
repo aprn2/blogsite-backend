@@ -8,6 +8,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
+    "serve": "node index.js",
+    "restore": "node restore.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "joi": "^17.13.3",
     "joi-password-complexity": "^5.2.0",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.20.0",
     "mongoose": "^8.15.2",
     "multer": "^2.0.1",
     "nodemon": "^3.1.10",

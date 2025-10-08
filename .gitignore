@@ -2,3 +2,6 @@ node_modules
 .env
 images
 db_data
+db/**
+!db/dummy
+!db/

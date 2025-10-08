@@ -1,0 +1,58 @@
+[{
+	"name": "user1",
+	"userName": "user1",
+	"passHash": "0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90",
+	"email": "thisisme@mail.co",
+	"dob": "2000-01-02T04:35:10.227Z",
+    "admin": false,
+	"address": "bol street, sol city",
+	"createdAt": "2025-08-03T15:11:21.824Z",
+	"updatedAt": "2025-08-03T15:11:21.824Z",
+	"__v": 0
+},
+{
+	"name": "user2",
+	"userName": "user2",
+	"passHash": "6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3",
+	"email": "hello@hello.com",
+	"dob": "2010-02-12T04:35:10.227Z",
+    "admin": false,
+	"address": "hello street, good city",
+	"createdAt": "2025-08-11T14:51:56.433Z",
+	"updatedAt": "2025-08-11T14:51:56.433Z",
+	"__v": 0
+},
+{
+	"name": "user3",
+	"userName": "user3",
+	"passHash": "5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb",
+	"email": "hi@hello.com",
+	"dob": "2000-02-12T04:35:10.227Z",
+    "admin": false,
+	"address": "hello street, bye, bye bye good",
+	"createdAt": "2025-08-11T14:51:56.433Z",
+	"updatedAt": "2025-08-11T14:51:56.433Z",
+	"__v": 0
+},
+{
+	"name": "admin1",
+	"userName": "admin1",
+	"passHash": "25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7",
+	"email": "admin1@blog.com",
+	"dob": "1989-11-01T00:00:00Z",
+	"admin": true,
+	"createdAt": "2025-09-12T19:53:16.359Z",
+	"updatedAt": "2025-09-12T19:53:16.359Z",
+	"__v": 0
+},
+{
+	"name": "admin2",
+	"userName": "admin2",
+	"passHash": "1c142b2d01aa34e9a36bde480645a57fd69e14155dacfab5a3f9257b77fdc8d8",
+	"email": "admin2@admin.com",
+	"dob": "1999-11-01T00:00:00Z",
+	"admin": true,
+	"createdAt": "2025-09-12T19:53:16.359Z",
+	"updatedAt": "2025-09-12T19:53:16.359Z",
+	"__v": 0
+}]
